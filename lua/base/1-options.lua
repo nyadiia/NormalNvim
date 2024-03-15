@@ -89,4 +89,6 @@ vim.g.semantic_tokens_enabled = true -- Enable lsp semantic tokens at start.
 vim.g.url_effect_enabled = true -- Highlight URLs with an underline effect.
 
 vim.g.typst_pdf_viewer = "zathura" -- change TypstWatch command to use zathura instead of firefox
-
+vim.filetype.add({
+  pattern = { [".*/hyprland%.conf"] = "hyprlang" },
+})

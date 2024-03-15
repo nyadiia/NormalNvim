@@ -10,7 +10,9 @@
 ---
 
 # My changes
-- Add typst support
+- Add support for
+  - typst
+  - hyprlang (hyprland config files)
 - Changed colorscheme to [catppuccin](https://github.com/catppuccin/nvim)
 - Restore mode text to statusline
 - Changed alpha-nvim banner

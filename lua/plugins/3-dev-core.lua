@@ -163,6 +163,15 @@ return {
     ft = 'typst',
     lazy = false,
   },
+
+  -- hyprlang [hyprland support]
+  -- https://github.com/aserowy/tree-sitter-hypr
+  -- provides treesitter syntax highlighting for hyprland config files
+  {
+    "luckasRanarison/tree-sitter-hyprlang",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+  },
+
   -- nvim-java [java support]
   -- https://github.com/nvim-java/nvim-java
   -- Reliable jdtls support. Must go before mason-lspconfig nad lsp-config.
