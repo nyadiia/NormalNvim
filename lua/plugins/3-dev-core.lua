@@ -157,7 +157,6 @@ return {
     opts = { user_default_options = { names = false } },
   },
 
-  --  LSP -------------------------------------------------------------------
   -- typst.vim
   -- https://github.com/kaarmu/typst.vim
   -- typst support :)
