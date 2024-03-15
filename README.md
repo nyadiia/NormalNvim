@@ -9,6 +9,10 @@
 
 ---
 
+# My changes
+- Add typst support
+
+---
 - [Screenshots](#screenshots)
 - [How to install](#how-to-install)
 - [Distro features](#distro-features)
