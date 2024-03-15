@@ -9,6 +9,7 @@
 --       -> nvim-colorizer                 [hex colors]
 
 --       ## LSP
+--       -> typst.vim                      [typst support]
 --       -> nvim-java                      [java support]
 --       -> mason-lspconfig                [auto start lsp]
 --       -> nvim-lspconfig                 [lsp configs]
@@ -154,7 +155,14 @@ return {
   },
 
   --  LSP -------------------------------------------------------------------
-
+  -- typst.vim
+  -- https://github.com/kaarmu/typst.vim
+  -- typst support :)
+  {
+    'kaarmu/typst.vim',
+    ft = 'typst',
+    lazy = false,
+  },
   -- nvim-java [java support]
   -- https://github.com/nvim-java/nvim-java
   -- Reliable jdtls support. Must go before mason-lspconfig nad lsp-config.

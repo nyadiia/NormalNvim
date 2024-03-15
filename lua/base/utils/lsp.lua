@@ -157,6 +157,9 @@ function M.apply_user_lsp_settings(server_name)
     pcall(require, "neodev")
     opts.settings = { Lua = { workspace = { checkThirdParty = false } } }
   end
+  if server_name == "typst_lsp" then
+    opts.settings = { exportPdf = "onType" }
+  end
 
   -- Apply them
   local old_on_attach = server.on_attach
