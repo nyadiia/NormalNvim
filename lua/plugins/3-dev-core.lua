@@ -12,6 +12,7 @@
 
 --       ## LSP
 --       -> hex.nvim                       [hex editor]
+--       -> typst.vim                      [typst support]
 --       -> nvim-java                      [java support]
 --       -> mason-lspconfig                [auto start lsp]
 --       -> nvim-lspconfig                 [lsp configs]
@@ -156,6 +157,7 @@ return {
     opts = { user_default_options = { names = false } },
   },
 
+  --  LSP -------------------------------------------------------------------
   -- typst.vim
   -- https://github.com/kaarmu/typst.vim
   -- typst support :)
