@@ -7,9 +7,11 @@
 --       -> nvim-ts-autotag                [treesitter understand html tags]
 --       -> nvim-ts-context-commentstring  [treesitter comments]
 --       -> nvim-colorizer                 [hex colors]
+--       -> tree-sitter-hyprlang           [hyprlang support]
+--       -> typst.vim                      [typst support]
 
 --       ## LSP
---       -> typst.vim                      [typst support]
+--       -> hex.nvim                       [hex editor]
 --       -> nvim-java                      [java support]
 --       -> mason-lspconfig                [auto start lsp]
 --       -> nvim-lspconfig                 [lsp configs]
@@ -154,7 +156,6 @@ return {
     opts = { user_default_options = { names = false } },
   },
 
-  --  LSP -------------------------------------------------------------------
   -- typst.vim
   -- https://github.com/kaarmu/typst.vim
   -- typst support :)
@@ -172,6 +173,7 @@ return {
     dependencies = { "nvim-treesitter/nvim-treesitter" },
   },
 
+  --  LSP -------------------------------------------------------------------
   -- nvim-java [java support]
   -- https://github.com/nvim-java/nvim-java
   -- Reliable jdtls support. Must go before mason-lspconfig nad lsp-config.

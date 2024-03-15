@@ -58,6 +58,13 @@ return {
     name = "catppuccin",
     priority = 1000,
     opts = {
+      flavour = "mocha",
+      transparent_background = true,
+      mocha = {
+				base = "#11111b",
+				mantle = "#000000",
+			  crust = "#000000",
+		  },
       integrations = {
         aerial = true,
         cmp = true,
@@ -66,12 +73,11 @@ return {
         nvimtree = true,
         mason = true,
         treesitter = true,
-        notify = false,
-        mini = {
-            enabled = true,
-            indentscope_color = "",
-        },
         notify = true,
+        mini = {
+          enabled = true,
+          indentscope_color = "",
+        },
       },
     },
   },
