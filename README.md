@@ -11,6 +11,8 @@
 
 # My changes
 - Add typst support
+- Changed colorscheme to [catppuccin](https://github.com/catppuccin/nvim)
+- Restore mode text to statusline
 
 ---
 - [Screenshots](#screenshots)

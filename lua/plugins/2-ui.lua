@@ -51,13 +51,37 @@ return {
       plugins = { ["dashboard-nvim"] = true },
     },
   },
+  --  catppuccin [theme]
+  --  https://github.com/catppuccin/nvim
+  {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    priority = 1000,
+    opts = {
+      integrations = {
+        aerial = true,
+        cmp = true,
+        hop = true,
+        gitsigns = true,
+        nvimtree = true,
+        mason = true,
+        treesitter = true,
+        notify = false,
+        mini = {
+            enabled = true,
+            indentscope_color = "",
+        },
+        notify = true,
+      },
+    },
+  },
 
   --  alpha-nvim [greeter]
   --  https://github.com/goolord/alpha-nvim
   {
     "goolord/alpha-nvim",
     cmd = "Alpha",
-    -- setup header and buttonts
+    -- setup header and buttons
     opts = function()
       local dashboard = require "alpha.themes.dashboard"
 
@@ -348,7 +372,7 @@ return {
         } or nil,
         statusline = { -- UI statusbar
           hl = { fg = "fg", bg = "bg" },
-          lib.component.mode(),
+          lib.component.mode({ mode_text = { "center" } }),
           lib.component.git_branch(),
           lib.component.file_info(),
           lib.component.git_diff(),
