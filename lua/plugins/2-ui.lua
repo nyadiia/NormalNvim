@@ -93,6 +93,30 @@ return {
   --     })
   --   end,
   -- },
+  -- --  catppuccin [theme]
+  -- --  https://github.com/catppuccin/nvim
+  -- {
+  --   "catppuccin/nvim",
+  --   name = "catppuccin",
+  --   priority = 1000,
+  --   opts = {
+  --     integrations = {
+  --       aerial = true,
+  --       cmp = true,
+  --       hop = true,
+  --       gitsigns = true,
+  --       nvimtree = true,
+  --       mason = true,
+  --       treesitter = true,
+  --       notify = false,
+  --       mini = {
+  --           enabled = true,
+  --           indentscope_color = "",
+  --       },
+  --       notify = true,
+  --     },
+  --   },
+  -- },
 
   --  alpha-nvim [greeter]
   --  https://github.com/goolord/alpha-nvim
