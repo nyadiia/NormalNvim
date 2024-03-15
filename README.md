@@ -13,6 +13,7 @@
 - Add typst support
 - Changed colorscheme to [catppuccin](https://github.com/catppuccin/nvim)
 - Restore mode text to statusline
+- Changed alpha-nvim banner
 
 ---
 - [Screenshots](#screenshots)
