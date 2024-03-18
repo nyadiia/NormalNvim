@@ -38,10 +38,10 @@ return {
   --   This way you can install and use 'ranger' and its dependency 'pynvim'.
   {
     "kevinhwang91/rnvimr",
-    event = "VeryLazy",
+    event = "User BaseDefered",
     cmd = { "RnvimrToggle" },
     enabled = not is_windows,
-    config = function(_, opts)
+    config = function()
       -- vim.g.rnvimr_vanilla = 1            -- Often solves issues in your ranger config.
       vim.g.rnvimr_enable_picker = 1         -- Close rnvimr after choosing a file.
       vim.g.rnvimr_ranger_cmd = { "ranger" } -- By passing a script like TERM=foot ranger "$@" you can open terminals inside ranger.
@@ -55,7 +55,6 @@ return {
           style = "minimal",
         }
       end
-      require("project_nvim").setup(opts)
     end,
   },
 
@@ -63,7 +62,7 @@ return {
   -- https://github.com/ahmedkhalf/project.nvim
   {
     "Zeioth/project.nvim",
-    event = "VeryLazy",
+    event = "User BaseDefered",
     cmd = "ProjectRoot",
     opts = {
       -- How to find root directory
@@ -116,7 +115,7 @@ return {
   -- By default it support neovim/aerial and others.
   {
     "stevearc/stickybuf.nvim",
-    event = "VeryLazy",
+    event = "User BaseDefered",
     config = function() require("stickybuf").setup() end
   },
 
@@ -183,7 +182,7 @@ return {
   -- https://github.com/Shatur/neovim-session-manager
   {
     "Shatur/neovim-session-manager",
-    event = "User BaseFile",
+    event = "User BaseDefered",
     cmd = "SessionManager",
     opts = function()
       local config = require('session_manager.config')
@@ -319,10 +318,10 @@ return {
   -- https://github.com/nvim-neo-tree/neo-tree.nvim
   {
     "nvim-neo-tree/neo-tree.nvim",
-    dependencies = { "MunifTanjim/nui.nvim" },
+    dependencies = "MunifTanjim/nui.nvim",
     cmd = "Neotree",
-    init = function() vim.g.neo_tree_remove_legacy_commands = true end,
     opts = function()
+      vim.g.neo_tree_remove_legacy_commands = true
       local utils = require "base.utils"
       local get_icon = utils.get_icon
       return {
@@ -357,31 +356,31 @@ return {
         default_component_configs = {
           indent = { padding = 0 },
           icon = {
-            folder_closed = get_icon "FolderClosed",
-            folder_open = get_icon "FolderOpen",
-            folder_empty = get_icon "FolderEmpty",
-            folder_empty_open = get_icon "FolderEmpty",
+            folder_closed = get_icon("FolderClosed"),
+            folder_open = get_icon("FolderOpen"),
+            folder_empty = get_icon("FolderEmpty"),
+            folder_empty_open = get_icon("FolderEmpty"),
             default = get_icon "DefaultFile",
           },
           modified = { symbol = get_icon "FileModified" },
           git_status = {
             symbols = {
-              added = get_icon "GitAdd",
-              deleted = get_icon "GitDelete",
-              modified = get_icon "GitChange",
-              renamed = get_icon "GitRenamed",
-              untracked = get_icon "GitUntracked",
-              ignored = get_icon "GitIgnored",
-              unstaged = get_icon "GitUnstaged",
-              staged = get_icon "GitStaged",
-              conflict = get_icon "GitConflict",
+              added = get_icon("GitAdd"),
+              deleted = get_icon("GitDelete"),
+              modified = get_icon("GitChange"),
+              renamed = get_icon("GitRenamed"),
+              untracked = get_icon("GitUntracked"),
+              ignored = get_icon("GitIgnored"),
+              unstaged = get_icon("GitUnstaged"),
+              staged = get_icon("GitStaged"),
+              conflict = get_icon("GitConflict"),
             },
           },
         },
         -- A command is a function that we can assign to a mapping (below)
         commands = {
           system_open = function(state)
-            require("base.utils").system_open(state.tree:get_node():get_id())
+            require("base.utils").open_with_program(state.tree:get_node():get_id())
           end,
           parent_or_close = function(state)
             local node = state.tree:get_node()
@@ -581,7 +580,7 @@ return {
   --  https://github.com/andymass/vim-matchup
   {
     "andymass/vim-matchup",
-    event = "VeryLazy",
+    event = "User BaseFile",
     config = function()
       vim.g.matchup_matchparen_deferred = 1   -- work async
       vim.g.matchup_matchparen_offscreen = {} -- disable status bar icon
@@ -621,8 +620,8 @@ return {
       local npairs = require "nvim-autopairs"
       npairs.setup(opts)
       if not vim.g.autopairs_enabled then npairs.disable() end
-      local cmp_status_ok, cmp = pcall(require, "cmp")
-      if cmp_status_ok then
+      local status_ok, cmp = pcall(require, "cmp")
+      if status_ok then
         cmp.event:on(
           "confirm_done",
           require("nvim-autopairs.completion.cmp").on_confirm_done {

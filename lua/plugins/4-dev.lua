@@ -48,18 +48,22 @@ return {
   --  https://github.com/numToStr/Comment.nvim
   {
     "numToStr/Comment.nvim",
+    event = "User BaseFile",
+    opts = function()
+      -- improve performance, when possible
+      local _, ts_context_commentstring =
+        pcall(require, "ts_context_commentstring.integrations.comment_nvim")
+      local pre_hook = ts_context_commentstring.create_pre_hook() or nil
+
+      -- opts
+      return {
+        pre_hook = pre_hook
+      }
+    end,
     keys = {
       { "gc", mode = { "n", "v" }, desc = "Comment toggle linewise" },
       { "gb", mode = { "n", "v" }, desc = "Comment toggle blockwise" },
     },
-    opts = function()
-      local commentstring_avail, commentstring =
-        pcall(require, "ts_context_commentstring.integrations.comment_nvim")
-      return commentstring_avail
-          and commentstring
-          and { pre_hook = commentstring.create_pre_hook() }
-        or {}
-    end,
   },
 
   --  SNIPPETS ----------------------------------------------------------------
@@ -68,12 +72,13 @@ return {
   --  https://github.com/rafamadriz/friendly-snippets
   {
     "L3MON4D3/LuaSnip",
-    build = vim.fn.has "win32" ~= 0 and "make install_jsregexp" or nil,
+    build = not is_windows and "make install_jsregexp" or nil,
     dependencies = {
       "rafamadriz/friendly-snippets",
       "Zeioth/NormalSnippets",
       "benfowler/telescope-luasnip.nvim",
     },
+    event = "User BaseFile",
     opts = {
       history = true,
       delete_check_events = "TextChanged",
@@ -114,12 +119,12 @@ return {
       return {
         max_file_length = vim.g.big_file.lines,
         signs = {
-          add = { text = get_icon "GitSign" },
-          change = { text = get_icon "GitSign" },
-          delete = { text = get_icon "GitSign" },
-          topdelete = { text = get_icon "GitSign" },
-          changedelete = { text = get_icon "GitSign" },
-          untracked = { text = get_icon "GitSign" },
+          add = { text = get_icon("GitSign") },
+          change = { text = get_icon("GitSign") },
+          delete = { text = get_icon("GitSign") },
+          topdelete = { text = get_icon("GitSign") },
+          changedelete = { text = get_icon("GitSign") },
+          untracked = { text = get_icon("GitSign") },
         },
       }
     end
@@ -158,24 +163,18 @@ return {
       "Git",
       "Gstatus",
     },
-    init = function() vim.g.fugitive_no_maps = 1 end,
+    config = function()
+      -- NOTE: On vimplugins we use config instead of opts.
+      vim.g.fugitive_no_maps = 1
+    end,
   },
-
-
 
   --  ANALYZER ----------------------------------------------------------------
   --  [symbols tree]
   --  https://github.com/stevearc/aerial.nvim
   {
     "stevearc/aerial.nvim",
-    event = "VeryLazy",
-    cmd = {
-      "AerialToggle",
-      "AerialOpen",
-      "AerialNavOpen",
-      "AerialInfo",
-      "AerialClose",
-    },
+    event = "User BaseFile",
     opts = {
       filter_kind = { -- Symbols that will appear on the tree
         -- "Class",
@@ -313,7 +312,7 @@ return {
   -- It just set the buffer options to tabluate in a certain way.
   {
     "NMAC427/guess-indent.nvim",
-    event = "VeryLazy",
+    event = "User BaseFile",
     config = function(_, opts)
       require("guess-indent").setup(opts)
       vim.cmd.lua {
@@ -843,7 +842,8 @@ return {
     "skywind3000/gutentags_plus",
     ft = { "c", "cpp" },
     dependencies = { "ludovicchabant/vim-gutentags" },
-    init = function()
+    config = function()
+      -- NOTE: On vimplugins we use config instead of opts.
       vim.g.gutentags_plus_nomap = 1
       vim.g.gutentags_resolve_symlinks = 1
       vim.g.gutentags_cache_dir = vim.fn.stdpath "cache" .. "/tags"
@@ -856,6 +856,7 @@ return {
           end
         end,
       })
+
     end,
   },
 
