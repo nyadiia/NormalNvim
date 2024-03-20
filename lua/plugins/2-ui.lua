@@ -184,7 +184,7 @@ return {
       vim.cmd "highlight DashboardHeader guifg=#F7778F"
 
       -- If on windows, don't show the 'ranger' button
-      local ranger_button = dashboard.button("r", "🐍 Ranger  ", "<cmd>RnvimrToggle<CR>")
+      local ranger_button = dashboard.button("y", "🦆 Yazi  ", "<cmd>Yazi<CR>")
       if is_windows then ranger_button = nil end
 
       -- Buttons

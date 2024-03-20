@@ -159,7 +159,7 @@ function M.apply_user_lsp_settings(server_name)
     opts.settings = { Lua = { workspace = { checkThirdParty = false } } }
   end
   if server_name == "typst_lsp" then
-    opts.settings = { exportPdf = "onType" }
+    opts.settings = { exportPdf = "onType" } -- this is not onType because zathura crashes if a pdf is changed too many times per second
   end
 
   -- Apply them

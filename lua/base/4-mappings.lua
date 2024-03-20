@@ -672,8 +672,12 @@ end
 
 -- file browsers ------------------------------------
 -- ranger
-if is_available "rnvimr" then
-  maps.n["<leader>r"] = { "<cmd>RnvimrToggle<cr>", desc = "Ranger" }
+-- if is_available "rnvimr" then
+--   maps.n["<leader>r"] = { "<cmd>RnvimrToggle<cr>", desc = "Ranger" }
+-- end
+-- yazi
+if is_available "yazi.nvim" then
+  maps.n["<leader>r"] = { "<cmd>Yazi<cr>", desc = "Yazi" }
 end
 
 -- neotree

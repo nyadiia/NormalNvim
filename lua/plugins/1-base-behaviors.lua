@@ -2,7 +2,7 @@
 -- Things that add new behaviors.
 
 --    Sections:
---       -> ranger file browser    [ranger]
+--       -> yazi file browser      [yazi]
 --       -> project.nvim           [project search + auto cd]
 --       -> trim.nvim              [auto trim spaces]
 --       -> stickybuf.nvim         [lock special buffers]
@@ -24,7 +24,8 @@
 --       -> distroupdate.nvim      [distro update]
 
 local is_windows = vim.fn.has('win32') == 1             -- true if on windows
-local is_android = vim.fn.isdirectory('/system') == 1   -- true if on android
+-- i'm never using my config on android
+-- local is_android = vim.fn.isdirectory('/system') == 1   -- true if on android
 
 return {
   -- [ranger] file browser
@@ -36,26 +37,40 @@ return {
   -- * Delete rnvimr and install some other file browser you like.
   -- * Or enable WLS on Windows and launch neovim from there.
   --   This way you can install and use 'ranger' and its dependency 'pynvim'.
+  -- {
+  --   "kevinhwang91/rnvimr",
+  --   event = "User BaseDefered",
+  --   cmd = { "RnvimrToggle" },
+  --   enabled = not is_windows,
+  --   config = function()
+  --     -- vim.g.rnvimr_vanilla = 1            -- Often solves issues in your ranger config.
+  --     vim.g.rnvimr_enable_picker = 1         -- Close rnvimr after choosing a file.
+  --     vim.g.rnvimr_ranger_cmd = { "ranger" } -- By passing a script like TERM=foot ranger "$@" you can open terminals inside ranger.
+  --     if is_android then -- Open on full screenn
+  --       vim.g.rnvimr_layout = {
+  --         relative = "editor",
+  --         width = 200,
+  --         height = 100,
+  --         col = 0,
+  --         row = 0,
+  --         style = "minimal",
+  --       }
+  --     end
+  --   end,
+  -- },
   {
-    "kevinhwang91/rnvimr",
-    event = "User BaseDefered",
-    cmd = { "RnvimrToggle" },
+    "DreamMaoMao/yazi.nvim",
+    event = "User BaseDeferred",
     enabled = not is_windows,
-    config = function()
-      -- vim.g.rnvimr_vanilla = 1            -- Often solves issues in your ranger config.
-      vim.g.rnvimr_enable_picker = 1         -- Close rnvimr after choosing a file.
-      vim.g.rnvimr_ranger_cmd = { "ranger" } -- By passing a script like TERM=foot ranger "$@" you can open terminals inside ranger.
-      if is_android then -- Open on full screenn
-        vim.g.rnvimr_layout = {
-          relative = "editor",
-          width = 200,
-          height = 100,
-          col = 0,
-          row = 0,
-          style = "minimal",
-        }
-      end
-    end,
+    cmd = { "Yazi" },
+    dependencies = {
+      "nvim-telescope/telescope.nvim",
+      "nvim-lua/plenary.nvim",
+    },
+
+    keys = {
+      { "<leader>gy", "<cmd>Yazi<CR>", desc = "Toggle Yazi" },
+    },
   },
 
   -- project.nvim [project search + auto cd]
