@@ -17,8 +17,10 @@
 - Changed colorscheme to [catppuccin](https://github.com/catppuccin/nvim)
 - Restore mode text to statusline
 - Changed alpha-nvim banner
+- Replaced [ranger](https://github.com/ranger/ranger) with [yazi](https://github.com/sxyazi/yazi)
 
 ---
+
 - [Screenshots](#screenshots)
 - [How to install](#how-to-install)
 - [Distro features](#distro-features)
