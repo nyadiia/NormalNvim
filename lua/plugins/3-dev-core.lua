@@ -188,15 +188,7 @@ return {
       "MunifTanjim/nui.nvim",
       "neovim/nvim-lspconfig",
       "mfussenegger/nvim-dap",
-      {
-        "williamboman/mason.nvim",
-        opts = {
-          registries = {
-            "github:nvim-java/mason-registry",
-            "github:mason-org/mason-registry",
-          },
-        },
-      }
+      "williamboman/mason.nvim",
     },
     opts = {
 	    notifications = {
@@ -255,6 +247,10 @@ return {
       "MasonUpdateAll", -- this cmd is provided by mason-extra-cmds
     },
     opts = {
+      registries = {
+        "github:nvim-java/mason-registry",
+        "github:mason-org/mason-registry",
+      },
       ui = {
         icons = {
           package_installed = "✓",
