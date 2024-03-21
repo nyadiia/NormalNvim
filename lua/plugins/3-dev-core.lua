@@ -176,7 +176,7 @@ return {
   --  LSP -------------------------------------------------------------------
   -- nvim-java [java support]
   -- https://github.com/nvim-java/nvim-java
-  -- Reliable jdtls support. Must go before mason-lspconfig nad lsp-config.
+  -- Reliable jdtls support. Must go before mason-lspconfig and lsp-config.
   {
     "nvim-java/nvim-java",
     ft = { "java" },
@@ -198,10 +198,11 @@ return {
         },
       }
     },
-    config = function()
-      -- nvim-java DAP support.
-      require("java").setup()
-    end
+    opts = {
+	    notifications = {
+	      dap = false,
+	    },
+    },
   },
 
   --  nvim-lspconfig [lsp configs]
