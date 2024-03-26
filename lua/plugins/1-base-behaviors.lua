@@ -336,7 +336,7 @@ return {
     cmd = "Neotree",
     opts = function()
       vim.g.neo_tree_remove_legacy_commands = true
-      local utils = require "base.utils"
+      local utils = require("base.utils")
       local get_icon = utils.get_icon
       return {
         auto_clean_after_session_restore = true,
@@ -631,7 +631,7 @@ return {
       },
     },
     config = function(_, opts)
-      local npairs = require "nvim-autopairs"
+      local npairs = require("nvim-autopairs")
       npairs.setup(opts)
       if not vim.g.autopairs_enabled then npairs.disable() end
 
@@ -671,8 +671,9 @@ return {
         -- Additionally, you can use <space>ui to toggle inlay hints.
         toggle_key_flip_floatwin_setting = is_enabled
       }
+   
     end,
-    config = function(_, opts) require 'lsp_signature'.setup(opts) end
+    config = function(_, opts) require ('lsp_signature').setup(opts) end
   },
 
   -- distroupdate.nvim [distro update]
@@ -690,7 +691,7 @@ return {
       "DistroUpdateRevert"
     },
     opts = function()
-      local utils = require "base.utils"
+      local utils = require("base.utils")
       local config_dir = utils.os_path(vim.fn.stdpath "config" .. "/lua/base/")
       return {
         channel = "stable", -- stable/nightly
