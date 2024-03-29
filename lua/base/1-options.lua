@@ -7,7 +7,8 @@
 _G.base = {}
 
 -- Theme
-base.default_colorscheme = "catppuccin"
+base.default_colorscheme = "gruvbox"
+vim.o.background = "dark"
 
 -- Options --------------------------------------------------------------------
 vim.opt.breakindent = true -- Wrap indent to match  line start.
@@ -37,7 +38,7 @@ vim.opt.showmode = false -- Disable showing modes in command line.
 vim.opt.showtabline = 2 -- always display tabline.
 vim.opt.signcolumn = "yes" -- Always show the sign column.
 vim.opt.smartcase = true -- Case sensitivie searching.
-vim.opt.smartindent = false -- Smarter autoindentation.
+vim.opt.smartindent = true -- Smarter autoindentation.
 vim.opt.splitbelow = true -- Splitting a new window below the current one.
 vim.opt.splitright = true -- Splitting a new window at the right of the current one.
 vim.opt.tabstop = 2 -- Number of space in a tab.

@@ -22,65 +22,77 @@
 --       -> which-key                   [on-screen keybinding]
 
 local utils = require "base.utils"
-local is_windows = vim.fn.has('win32') == 1             -- true if on windows
-local is_android = vim.fn.isdirectory('/system') == 1   -- true if on android
+local is_windows = vim.fn.has('win32') == 1           -- true if on windows
+local is_android = vim.fn.isdirectory('/system') == 1 -- true if on android
 
 return {
 
   -- tokyonight [theme]
   -- https://github.com/folke/tokyonight.nvim
+  -- {
+  --   "Zeioth/tokyonight.nvim",
+  --   event = "User LoadColorSchemes",
+  --   opts = {
+  --     dim_inactive = false,
+  --     styles = {
+  --       comments = { italic = true },
+  --       keywords = { italic = true },
+  --     },
+  --   }
+  -- },
+  --
+  -- --  astrotheme [theme]
+  -- --  https://github.com/AstroNvim/astrotheme
+  -- {
+  --   "AstroNvim/astrotheme",
+  --   event = "User LoadColorSchemes",
+  --   opts = {
+  --     palette = "astrodark",
+  --     plugins = { ["dashboard-nvim"] = true },
+  --   },
+  -- },
+  -- --  catppuccin [theme]
+  -- --  https://github.com/catppuccin/nvim
+  -- {
+  --   "catppuccin/nvim",
+  --   name = "catppuccin",
+  --   priority = 1000,
+  --   opts = {
+  --     flavour = "frappe",
+  --     transparent_background = true,
+  --     integrations = {
+  --       aerial = true,
+  --       cmp = true,
+  --       hop = true,
+  --       gitsigns = true,
+  --       nvimtree = true,
+  --       mason = true,
+  --       treesitter = true,
+  --       notify = true,
+  --       mini = {
+  --         enabled = true,
+  --         indentscope_color = "",
+  --       },
+  --     },
+  --   },
+  -- },
   {
-    "Zeioth/tokyonight.nvim",
-    event = "User LoadColorSchemes",
-    opts = {
-      dim_inactive = false,
-      styles = {
-        comments = { italic = true },
-        keywords = { italic = true },
-      },
-    }
-  },
-
-  --  astrotheme [theme]
-  --  https://github.com/AstroNvim/astrotheme
-  {
-    "AstroNvim/astrotheme",
-    event = "User LoadColorSchemes",
-    opts = {
-      palette = "astrodark",
-      plugins = { ["dashboard-nvim"] = true },
-    },
-  },
-  --  catppuccin [theme]
-  --  https://github.com/catppuccin/nvim
-  {
-    "catppuccin/nvim",
-    name = "catppuccin",
+    "ellisonleao/gruvbox.nvim",
     priority = 1000,
-    opts = {
-      flavour = "mocha",
-      transparent_background = true,
-      mocha = {
-				base = "#11111b",
-				mantle = "#000000",
-			  crust = "#000000",
-		  },
-      integrations = {
-        aerial = true,
-        cmp = true,
-        hop = true,
-        gitsigns = true,
-        nvimtree = true,
-        mason = true,
-        treesitter = true,
-        notify = true,
-        mini = {
-          enabled = true,
-          indentscope_color = "",
-        },
-      },
-    },
+    config = true
   },
+  -- {
+  --   "neanias/everforest-nvim",
+  --   version = false,
+  --   lazy = false,
+  --   priority = 1000, -- make sure to load this before all the other start plugins
+  --   -- Optional; default configuration will be used if setup isn't called.
+  --   config = function()
+  --     require("everforest").setup({
+  --       -- Your config here
+  --     })
+  --   end,
+  -- },
 
   --  alpha-nvim [greeter]
   --  https://github.com/goolord/alpha-nvim
@@ -149,35 +161,37 @@ return {
       --   [[ \/_/\/_/\/__/    \/_/\/_/\/_/\/_/]],
       -- }
 
-      if is_android then dashboard.section.header.val = {
-        [[         __                ]],
-        [[ __  __ /\_\    ___ ___    ]],
-        [[/\ \/\ \\/\ \ /' __` __`\  ]],
-        [[\ \ \_/ |\ \ \/\ \/\ \/\ \ ]],
-        [[ \ \___/  \ \_\ \_\ \_\ \_\]],
-        [[  \/__/    \/_/\/_/\/_/\/_/]],
-       }
-      else dashboard.section.header.val = {
--- [[888b      88                                                           88]],
--- [[8888b     88                                                           88]],
--- [[88 `8b    88                                                           88]],
--- [[88  `8b   88   ,adPPYba,   8b,dPPYba,  88,dPYba,,adPYba,   ,adPPYYba,  88]],
--- [[88   `8b  88  a8"     "8a  88P'   "Y8  88P'   "88"    "8a  ""     `Y8  88]],
--- [[88    `8b 88  8b       d8  88          88      88      88  ,adPPPPP88  88]],
--- [[88     `8888  "8a,   ,a8"  88          88      88      88  88,    ,88  88]],
--- [[88      `888   `"YbbdP"'   88          88      88      88  `"8bbdP"Y8  88]],
---                  [[                                    __                ]],
---                  [[                      ___   __  __ /\_\    ___ ___    ]],
---                  [[                    /' _ `\/\ \/\ \\/\ \ /' __` __`\  ]],
---                  [[                    /\ \/\ \ \ \_/ |\ \ \/\ \/\ \/\ \ ]],
---                  [[                    \ \_\ \_\ \___/  \ \_\ \_\ \_\ \_\]],
---                  [[                     \/_/\/_/\/__/    \/_/\/_/\/_/\/_/]],
-[[                    ___             _         ]],
-[[   ____  ____ _____/ (_)___ __   __(_)___ ___ ]],
-[[  / __ \/ __ `/ __  / / __ `/ | / / / __ `__ \]],
-[[ / / / / /_/ / /_/ / / /_/ /| |/ / / / / / / /]],
-[[/_/ /_/\__,_/\__,_/_/\__,_/ |___/_/_/ /_/ /_/ ]],
-      }
+      if is_android then
+        dashboard.section.header.val = {
+          [[         __                ]],
+          [[ __  __ /\_\    ___ ___    ]],
+          [[/\ \/\ \\/\ \ /' __` __`\  ]],
+          [[\ \ \_/ |\ \ \/\ \/\ \/\ \ ]],
+          [[ \ \___/  \ \_\ \_\ \_\ \_\]],
+          [[  \/__/    \/_/\/_/\/_/\/_/]],
+        }
+      else
+        dashboard.section.header.val = {
+          -- [[888b      88                                                           88]],
+          -- [[8888b     88                                                           88]],
+          -- [[88 `8b    88                                                           88]],
+          -- [[88  `8b   88   ,adPPYba,   8b,dPPYba,  88,dPYba,,adPYba,   ,adPPYYba,  88]],
+          -- [[88   `8b  88  a8"     "8a  88P'   "Y8  88P'   "88"    "8a  ""     `Y8  88]],
+          -- [[88    `8b 88  8b       d8  88          88      88      88  ,adPPPPP88  88]],
+          -- [[88     `8888  "8a,   ,a8"  88          88      88      88  88,    ,88  88]],
+          -- [[88      `888   `"YbbdP"'   88          88      88      88  `"8bbdP"Y8  88]],
+          --                  [[                                    __                ]],
+          --                  [[                      ___   __  __ /\_\    ___ ___    ]],
+          --                  [[                    /' _ `\/\ \/\ \\/\ \ /' __` __`\  ]],
+          --                  [[                    /\ \/\ \ \ \_/ |\ \ \/\ \/\ \/\ \ ]],
+          --                  [[                    \ \_\ \_\ \___/  \ \_\ \_\ \_\ \_\]],
+          --                  [[                     \/_/\/_/\/__/    \/_/\/_/\/_/\/_/]],
+          [[                    ___             _         ]],
+          [[   ____  ____ _____/ (_)___ __   __(_)___ ___ ]],
+          [[  / __ \/ __ `/ __  / / __ `/ | / / / __ `__ \]],
+          [[ / / / / /_/ / /_/ / / /_/ /| |/ / / / / / / /]],
+          [[/_/ /_/\__,_/\__,_/_/\__,_/ |___/_/_/ /_/ /_/ ]],
+        }
       end
 
       dashboard.section.header.opts.hl = "DashboardHeader"
@@ -335,10 +349,10 @@ return {
         opts = {
           disable_winbar_cb = function(args) -- We do this to avoid showing it on the greeter.
             local is_disabled = not require("heirline-components.buffer").is_valid(args.buf) or
-            lib.condition.buffer_matches({
-              buftype = { "terminal", "prompt", "nofile", "help", "quickfix" },
-              filetype = { "NvimTree", "neo%-tree", "dashboard", "Outline", "aerial" },
-            }, args.buf)
+                lib.condition.buffer_matches({
+                  buftype = { "terminal", "prompt", "nofile", "help", "quickfix" },
+                  filetype = { "NvimTree", "neo%-tree", "dashboard", "Outline", "aerial" },
+                }, args.buf)
             return is_disabled
           end,
         },
@@ -508,7 +522,7 @@ return {
     "stevearc/dressing.nvim",
     event = "User BaseDefered",
     opts = {
-      input = { default_prompt = "➤ "},
+      input = { default_prompt = "➤ " },
       select = { backend = { "telescope", "builtin" } },
     }
   },
@@ -531,14 +545,14 @@ return {
         presets = { bottom_search = true }, -- The kind of popup used for /
         cmdline = {
           view = "cmdline",                 -- The kind of popup used for :
-          format= {
-            cmdline =     { conceal = enable_conceal },
+          format = {
+            cmdline = { conceal = enable_conceal },
             search_down = { conceal = enable_conceal },
-            search_up =   { conceal = enable_conceal },
-            filter =      { conceal = enable_conceal },
-            lua =         { conceal = enable_conceal },
-            help =        { conceal = enable_conceal },
-            input =       { conceal = enable_conceal },
+            search_up = { conceal = enable_conceal },
+            filter = { conceal = enable_conceal },
+            lua = { conceal = enable_conceal },
+            help = { conceal = enable_conceal },
+            input = { conceal = enable_conceal },
           }
         },
 
@@ -729,4 +743,4 @@ return {
   },
 
 
-}  -- end of return
+} -- end of return

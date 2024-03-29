@@ -54,7 +54,7 @@ return {
       local _, ts_context_commentstring =
         pcall(require, "ts_context_commentstring.integrations.comment_nvim")
       local pre_hook = ts_context_commentstring.create_pre_hook() or nil
-
+      require('Comment.ft').set('hyprlang', '#%s')
       -- opts
       return {
         pre_hook = pre_hook
