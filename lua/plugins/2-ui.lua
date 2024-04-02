@@ -322,7 +322,8 @@ return {
             "notify",
             "startify",
             "toggleterm",
-            "Trouble"
+            "Trouble",
+            "calltree"
           }
           if vim.tbl_contains(ignored_filetypes, vim.bo.filetype) then
             vim.b.miniindentscope_disable = true
