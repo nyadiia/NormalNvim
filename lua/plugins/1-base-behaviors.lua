@@ -24,9 +24,8 @@
 --       -> nvim-lightbulb         [lightbulb for code actions]
 --       -> distroupdate.nvim      [distro update]
 
-local is_windows = vim.fn.has('win32') == 1             -- true if on windows
--- i'm never using my config on android
--- local is_android = vim.fn.isdirectory('/system') == 1   -- true if on android
+local is_windows = vim.fn.has('win32') == 1         -- true if on windows
+local is_android = vim.fn.isdirectory('/data') == 1 -- true if on android
 
 return {
   -- [ranger] file browser
@@ -673,8 +672,13 @@ return {
         -- Additionally, you can use <space>ui to toggle inlay hints.
         toggle_key_flip_floatwin_setting = is_enabled
       }
+   
     end,
+<<<<<<< HEAD
     config = function(_, opts) require('lsp_signature').setup(opts) end
+=======
+    config = function(_, opts) require ('lsp_signature').setup(opts) end
+>>>>>>> refs/remotes/origin/main
   },
 
   -- nvim-lightbulb [lightbulb for code actions]
@@ -683,9 +687,15 @@ return {
   {
     'kosayoda/nvim-lightbulb',
     enabled = vim.g.codeactions_enabled,
+<<<<<<< HEAD
     event = "User BaseFile",
     opts = {
       action_kinds = { -- show only for relevant code actions.
+=======
+    event = "VeryLazy",
+    opts = {
+      action_kinds = {  -- show only for relevant code actions.
+>>>>>>> refs/remotes/origin/main
         "quickfix",
       },
       ignore = {
