@@ -50,7 +50,6 @@ vim.opt.updatetime = 300 -- Length of time to wait before triggering the plugin.
 vim.opt.virtualedit = "block" -- Allow going past end of line in visual block mode.
 vim.opt.writebackup = false -- Disable making a backup before overwriting a file.
 vim.opt.shada = "!,'1000,<50,s10,h" -- Remember the last 1000 opened files
-vim.opt.undodir = vim.fn.stdpath "data" .. "/undodir" -- Chooses where to store the undodir.
 vim.opt.history = 1000 -- Number of commands to remember in a history table (per buffer).
 vim.opt.swapfile = false -- Ask what state to recover when opening a file that was not saved.
 vim.opt.wrap = true -- Disable wrapping of lines longer than the width of window.
@@ -67,7 +66,7 @@ vim.opt.shortmess:append { s = true, I = true } -- Disable startup message.
 vim.opt.backspace:append { "nostop" } -- Don't stop backspace at insert.
 vim.opt.diffopt:append { "algorithm:histogram", "linematch:60" } -- Enable linematch diff algorithm
 
-local is_android = vim.fn.isdirectory('/system') == 1
+local is_android = vim.fn.isdirectory('/data') == 1
 if is_android then vim.opt.mouse = "v" else vim.opt.mouse = "a" end -- Enable scroll for android
 
 -- Globals --------------------------------------------------------------------
@@ -79,6 +78,7 @@ vim.g.big_file = { size = 1024 * 100, lines = 10000 } -- For files bigger than t
 vim.g.autoformat_enabled = false -- Enable auto formatting at start.
 vim.g.autopairs_enabled = false -- Enable autopairs at start.
 vim.g.cmp_enabled = true -- Enable completion at start.
+vim.g.codeactions_enabled = true -- Enable displaying 💡 where code actions can be used.
 vim.g.codelens_enabled = true -- Enable automatic codelens refreshing for lsp that support it.
 vim.g.diagnostics_mode = 3 -- Set code linting (0=off, 1=only show in status line, 2=virtual text off, 3=all on).
 vim.g.icons_enabled = true -- Enable icons in the UI (disable if no nerd font is available).

@@ -70,7 +70,7 @@ This is only necessary if you installed NormalNvim by cloning manually. [To unlo
 * 🤖 **IDE tools:** We ship [Compiler.nvim](https://github.com/Zeioth/compiler.nvim) (compiler), [DAP](https://github.com/mfussenegger/nvim-dap) (debugger), [Neotest](https://github.com/nvim-neotest/neotest) (test runner), and [Dooku.nvim](https://github.com/Zeioth/dooku.nvim) (docs generator)
 * 🐞 **IDE parsers:** Linters, Formatters, LSP, Treesitter... preinstalled, preconfigured and ready to code for the top 12 most popular programming languages.
 * 🥶 **Plugin version freeze:** You can choose "stable" or "nightly" update channels. Or if you prefer, use :DistroFreezePluginVersions to create your own stable versions!
-* 🔙 **Rollbacks:** You can easily recover from a nvim distro update using :NvimRollbackRestore
+* 🔙 **Rollbacks:** You can easily recover from a nvim distro update using :DistroUpdateRevert
 * 🔥 **Hot reload:** Every time you change something in your config, the changes are reflected on nvim on real time without need to restart.
 * 📱 **Phone friendly:** You can also install it on Android Termux. Did you ever have a compiler in your pocket? 😉
 * ⌨️ **Alternative mappings:** By default the distro uses qwerty, but colemak-dh can be found [here](https://github.com/NormalNvim/NormalNvim/wiki).
@@ -92,7 +92,7 @@ The next relevant commands are provided by [distroupdate.nvim](https://github.co
 |---------------------|-----------------------------------------|
 | **:DistroUpdate** | To update the distro from git origin. Local uncommited changes will be lost. |
 | **:DistroUpdateRevert** | To revert the last `:NvimDistroUpdate`. |
-| **:DistroFreezePluginVersions** | To save your current plugin versions into `lazy_versions.lua`. |
+| **:DistroFreezePluginVersions** | To save your current plugins versions into `lazy_versions.lua`. |
 
 ## FAQ
 Please before opening an issue, check the [astrocommunity](https://github.com/AstroNvim/astrocommunity) repo where you can find help about how to install and configure most plugins.
@@ -101,7 +101,7 @@ Please before opening an issue, check the [astrocommunity](https://github.com/As
 
     `:checkhealth base`
 
-* **Why can't I see the icons?** You must install the [nerdfont version of your font](https://www.nerdfonts.com/), and use it on your terminal. Alternatively you can edit `base/icons/nerd_fond.lua` to manually specify your own icons.
+* **Why can't I see the icons?** You must install the [nerdfont version of your font](https://www.nerdfonts.com/), and use it on your terminal. Alternatively you can edit `base/icons/nerd_font.lua` to manually specify your own icons.
 
 * **How can I install a new colorscheme?** Go to `plugins/2-ui.lua`, and add the theme you want. Re-open nvim and now you can set your new colorcheme on `base/1-options.lua`. You can also preview all your installed themes with `<space>+ft`.
 
@@ -137,7 +137,6 @@ Did you know NormalNvim was the first Neovim distro to ship a compiler that [sup
 ## Roadmap
 * We are currently in a stable state.
 * Once selene add [this](https://github.com/Kampfkarren/selene/issues/224) and [this](https://github.com/Kampfkarren/selene/issues/524) and [this](https://github.com/Kampfkarren/selene/pull/591), let's add the new rules.
-* On aerial, let's keep an eye on [this](https://github.com/stevearc/aerial.nvim/issues/352) UX improvement.
+* ~~On aerial, let's keep an eye on [this](https://github.com/stevearc/aerial.nvim/issues/352) UX improvement.~~ → Thank you Steve.
 * Once nvim 0.10 is officially released, replace `get_active_clients` by `get_clients`.
-* Once nvim 0.10 is officially released, remove `unpack` in favor of `table.unpack`.
 * During 2024, create a landing page. Pretty much it's gonna be the same thing we have on the wiki, but with sparkles.

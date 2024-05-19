@@ -21,6 +21,7 @@
 --       -> hop.nvim               [go to word visually]
 --       -> nvim-autopairs         [auto close brackets]
 --       -> lsp_signature.nvim     [auto params help]
+--       -> nvim-lightbulb         [lightbulb for code actions]
 --       -> distroupdate.nvim      [distro update]
 
 local is_windows = vim.fn.has('win32') == 1             -- true if on windows
@@ -116,11 +117,11 @@ return {
     "cappyzawa/trim.nvim",
     event = "BufWrite",
     opts = {
-      -- ft_blocklist = {"typescript"},
       trim_on_write = true,
       trim_trailing = true,
       trim_last_line = false,
       trim_first_line = false,
+      -- ft_blocklist = { "markdown", "text", "org", "tex", "asciidoc", "rst" },
       -- patterns = {[[%s/\(\n\n\)\n\+/\1/]]}, -- Only one consecutive bl
     },
   },
@@ -337,7 +338,7 @@ return {
     cmd = "Neotree",
     opts = function()
       vim.g.neo_tree_remove_legacy_commands = true
-      local utils = require "base.utils"
+      local utils = require("base.utils")
       local get_icon = utils.get_icon
       return {
         auto_clean_after_session_restore = true,
@@ -632,11 +633,12 @@ return {
       },
     },
     config = function(_, opts)
-      local npairs = require "nvim-autopairs"
+      local npairs = require("nvim-autopairs")
       npairs.setup(opts)
       if not vim.g.autopairs_enabled then npairs.disable() end
-      local status_ok, cmp = pcall(require, "cmp")
-      if status_ok then
+
+      local is_cmp_loaded, cmp = pcall(require, "cmp")
+      if is_cmp_loaded then
         cmp.event:on(
           "confirm_done",
           require("nvim-autopairs.completion.cmp").on_confirm_done {
@@ -672,7 +674,34 @@ return {
         toggle_key_flip_floatwin_setting = is_enabled
       }
     end,
-    config = function(_, opts) require 'lsp_signature'.setup(opts) end
+    config = function(_, opts) require('lsp_signature').setup(opts) end
+  },
+
+  -- nvim-lightbulb [lightbulb for code actions]
+  -- https://github.com/kosayoda/nvim-lightbulb
+  -- Show a lightbulb where a code action is available
+  {
+    'kosayoda/nvim-lightbulb',
+    enabled = vim.g.codeactions_enabled,
+    event = "User BaseFile",
+    opts = {
+      action_kinds = { -- show only for relevant code actions.
+        "quickfix",
+      },
+      ignore = {
+        ft = { "lua" }, -- ignore filetypes with bad code actions.
+      },
+      autocmd = {
+        enabled = true,
+        updatetime = 100,
+      },
+      sign = { enabled = false },
+      virtual_text = {
+        enabled = true,
+        text = "💡"
+      }
+    },
+    config = function(_, opts) require("nvim-lightbulb").setup(opts) end
   },
 
   -- distroupdate.nvim [distro update]
@@ -690,7 +719,7 @@ return {
       "DistroUpdateRevert"
     },
     opts = function()
-      local utils = require "base.utils"
+      local utils = require("base.utils")
       local config_dir = utils.os_path(vim.fn.stdpath "config" .. "/lua/base/")
       return {
         channel = "stable", -- stable/nightly

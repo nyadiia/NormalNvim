@@ -105,7 +105,6 @@ M.apply_default_lsp_settings = function()
     -- check if client is fully disabled or filtered by function
     return not (vim.tbl_contains(disabled, client.name) or (type(filter) == "function" and not filter(client)))
   end
-
 end
 
 --- This function has the sole purpose of passing the lsp keymappings to lsp.
@@ -145,14 +144,14 @@ function M.apply_user_lsp_settings(server_name)
 
   -- Define user server rules.
   if server_name == "jsonls" then -- Add schemastore schemas
-    local schemastore_avail, schemastore = pcall(require, "schemastore")
-    if schemastore_avail then
+    local is_schemastore_loaded, schemastore = pcall(require, "schemastore")
+    if is_schemastore_loaded then
       opts.settings = { json = { schemas = schemastore.json.schemas(), validate = { enable = true } } }
     end
   end
   if server_name == "yamlls" then -- Add schemastore schemas
-    local schemastore_avail, schemastore = pcall(require, "schemastore")
-    if schemastore_avail then opts.settings = { yaml = { schemas = schemastore.yaml.schemas() } } end
+    local is_schemastore_loaded, schemastore = pcall(require, "schemastore")
+    if is_schemastore_loaded then opts.settings = { yaml = { schemas = schemastore.yaml.schemas() } } end
   end
   if server_name == "lua_ls" then -- Disable third party checking
     pcall(require, "neodev")
@@ -183,7 +182,7 @@ M.setup = function(server)
   -- Get the user settings.
   local opts = M.apply_user_lsp_settings(server)
 
-  --- Get a handler from lspconfig.
+  -- Get a handler from lspconfig.
   local setup_handler = stored_handlers[server] or require("lspconfig")[server].setup(opts)
 
   -- Apply our user settings to the lspconfig handler.

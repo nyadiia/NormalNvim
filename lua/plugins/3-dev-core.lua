@@ -72,7 +72,11 @@ return {
       matchup = {
         enable = true,
         enable_quotes = true,
-        disable = function(_, bufnr) return utils.is_big_file(bufnr) end,
+        disable = function(_, bufnr)
+          local excluded_filetypes = { "c" } -- disable for slow parsers
+          local is_disabled = excluded_filetypes or utils.is_big_file(bufnr)
+          return is_disabled
+        end,
       },
       incremental_selection = { enable = true },
       indent = { enable = true },
@@ -176,27 +180,24 @@ return {
   --  LSP -------------------------------------------------------------------
   -- nvim-java [java support]
   -- https://github.com/nvim-java/nvim-java
-  -- Reliable jdtls support. Must go before mason-lspconfig nad lsp-config.
+  -- Reliable jdtls support. Must go before mason-lspconfig and lsp-config.
   {
-    'nvim-java/nvim-java',
+    "nvim-java/nvim-java",
     ft = { "java" },
     dependencies = {
-      'nvim-java/lua-async-await',
-      'nvim-java/nvim-java-core',
-      'nvim-java/nvim-java-test',
-      'nvim-java/nvim-java-dap',
-      'MunifTanjim/nui.nvim',
-      'neovim/nvim-lspconfig',
-      'mfussenegger/nvim-dap',
-      {
-        'williamboman/mason.nvim',
-        opts = {
-          registries = {
-            'github:nvim-java/mason-registry',
-            'github:mason-org/mason-registry',
-          },
-        },
-      }
+      "nvim-java/lua-async-await",
+      "nvim-java/nvim-java-core",
+      "nvim-java/nvim-java-test",
+      "nvim-java/nvim-java-dap",
+      "MunifTanjim/nui.nvim",
+      "neovim/nvim-lspconfig",
+      "mfussenegger/nvim-dap",
+      "williamboman/mason.nvim",
+    },
+    opts = {
+      notifications = {
+        dap = false,
+      },
     },
   },
 
@@ -206,6 +207,13 @@ return {
   {
     "neovim/nvim-lspconfig",
     event = "User BaseFile",
+    dependencies = "nvim-java/nvim-java",
+    config = function()
+      -- nvim-java DAP support.
+      if utils.is_available("nvim-java") then
+        require("lspconfig").jdtls.setup({})
+      end
+    end
   },
 
   -- mason-lspconfig [auto start lsp]
@@ -243,6 +251,10 @@ return {
       "MasonUpdateAll", -- this cmd is provided by mason-extra-cmds
     },
     opts = {
+      registries = {
+        "github:nvim-java/mason-registry",
+        "github:mason-org/mason-registry",
+      },
       ui = {
         icons = {
           package_installed = "✓",
@@ -275,15 +287,27 @@ return {
   --  https://github.com/nvimtools/none-ls.nvim
   {
     "nvimtools/none-ls.nvim",
-    dependencies = { "jay-babu/mason-null-ls.nvim" },
+    dependencies = {
+      "jay-babu/mason-null-ls.nvim",
+      "nvimtools/none-ls-extras.nvim",
+    },
     event = "User BaseFile",
     opts = function()
-      -- You can customize your formatters here.
-      local nls = require("null-ls")
-      nls.builtins.formatting.shfmt.with({
+      local builtins = require("null-ls").builtins
+      local sources = require("null-ls.sources")
+
+      -- You can customize your builtins here.
+      builtins.formatting.shfmt.with({
         command = "shfmt",
         args = { "-i", "2", "-filename", "$FILENAME" },
       })
+
+      -- You can register external sources from none-ls-extras here.
+      local gherkin_source = require("none-ls.formatting.reformat_gherkin")
+      local gherkin_cmd = gherkin_source._opts.command
+      if vim.fn.executable(gherkin_cmd) == 1 then
+        sources.register(gherkin_source)
+      end
 
       -- Attach the user lsp mappings to every none-ls client.
       return { on_attach = utils_lsp.apply_user_lsp_mappings }
@@ -308,7 +332,7 @@ return {
       excluded_lsp_clients = {
         "null-ls", "jdtls"
       },
-      grace_period = (60*15),
+      grace_period = (60 * 15),
       wakeup_delay = 3000,
       notifications = false,
       retries = 3,
@@ -330,7 +354,7 @@ return {
     event = "InsertEnter",
     opts = function()
       -- ensure dependencies exist
-      local cmp = require "cmp"
+      local cmp = require("cmp")
       local luasnip = require("luasnip")
       local lspkind = require("lspkind")
 
@@ -350,8 +374,8 @@ return {
         enabled = function() -- disable in certain cases on dap.
           local is_prompt = vim.bo.buftype == "prompt"
           local is_dap_prompt = utils.is_available("cmp-dap")
-            and vim.tbl_contains(
-              { "dap-repl", "dapui_watches", "dapui_hover" }, vim.bo.filetype)
+              and vim.tbl_contains(
+                { "dap-repl", "dapui_watches", "dapui_hover" }, vim.bo.filetype)
           if is_prompt and not is_dap_prompt then
             return false
           else
