@@ -323,12 +323,8 @@ return {
             "startify",
             "toggleterm",
             "Trouble",
-<<<<<<< HEAD
             "calltree",
             "coverage"
-=======
-            "calltree"
->>>>>>> refs/remotes/origin/main
           }
           if vim.tbl_contains(ignored_filetypes, vim.bo.filetype) then
             vim.b.miniindentscope_disable = true

@@ -672,13 +672,8 @@ return {
         -- Additionally, you can use <space>ui to toggle inlay hints.
         toggle_key_flip_floatwin_setting = is_enabled
       }
-   
     end,
-<<<<<<< HEAD
     config = function(_, opts) require('lsp_signature').setup(opts) end
-=======
-    config = function(_, opts) require ('lsp_signature').setup(opts) end
->>>>>>> refs/remotes/origin/main
   },
 
   -- nvim-lightbulb [lightbulb for code actions]
@@ -687,15 +682,9 @@ return {
   {
     'kosayoda/nvim-lightbulb',
     enabled = vim.g.codeactions_enabled,
-<<<<<<< HEAD
     event = "User BaseFile",
     opts = {
       action_kinds = { -- show only for relevant code actions.
-=======
-    event = "VeryLazy",
-    opts = {
-      action_kinds = {  -- show only for relevant code actions.
->>>>>>> refs/remotes/origin/main
         "quickfix",
       },
       ignore = {
